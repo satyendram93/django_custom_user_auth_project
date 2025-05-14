@@ -1,0 +1,37 @@
+{% extends 'myaccount/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<h1>User Home Page</h1>
+
+
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for user in users %}
+    {% if not user.is_superuser %}
+    <div class="col">
+        <div class="card h-100">
+        {% if user.profile.profile_picture %}
+      <img src="{{user.profile.profile_picture.url}}" class="img-fluid rounded-start" alt="Profile Picture">
+      {% else %}
+      <img src="{% static 'myaccount/img/profile1.png' %}" class="img-fluid rounded-start" alt="Profile Picture">
+      {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">Full Name: {{user.first_name|title}} {{user.last_name|title}}</h5>
+            <p class="card-title">Email: {{user.email}}</p>
+        <p class="card-text">Date Of Birth: {{user.profile.date_of_birth}}</p>
+        <p class="card-text">Country: {{user.profile.country|title}}</p>
+        <p class="card-text">Phone: {{user.profile.phone_no}}</p>
+        <p class="card-text"><small class="text-muted">Last updated {{ user.profile.updated_at|timesince }} ago</small> <a href="{% url 'user_profile_pdf' %}">Download</a></p>
+        </div>
+        </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+  
+</div>
+
+{% endblock content %}

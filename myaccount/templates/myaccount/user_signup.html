@@ -1,0 +1,16 @@
+{% extends 'myaccount/base.html' %}
+
+{% block title %}Signup{% endblock title %}
+
+{% block content %}
+<div class="row d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-lg-6">
+        <h1 class="text-center">User Signup Form</h1>
+        <form method="POST" action="" class="card p-4 shadow">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-primary">Signup</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

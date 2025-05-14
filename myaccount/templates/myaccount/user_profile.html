@@ -1,0 +1,36 @@
+{% extends 'myaccount/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+
+<h1>User Profile Page</h1>
+
+<a class="btn btn-primary my-1" href="{% url 'user_profile_create' %}">Edit</a>
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      {% if profile.profile_picture %}
+      <img src="{{profile.profile_picture.url}}" class="img-fluid rounded-start" alt="Profile Picture">
+      {% else %}
+      <img src="{% static 'myaccount/img/profile1.png' %}" class="img-fluid rounded-start" alt="Profile Picture">
+      {% endif %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Email: {{profile.user.email}}</h5>
+        <p class="card-text">First Name: {{profile.user.first_name|title}}</p>
+        <p class="card-text">Last Name: {{profile.user.last_name|title}}</p>
+        <p class="card-text">Date Of Birth: {{profile.date_of_birth}}</p>
+        <p class="card-text">Country: {{profile.country|title}}</p>
+        <p class="card-text">Phone: {{profile.phone_no}}</p>
+        <p class="card-text"><small class="text-muted">Last updated {{ profile.updated_at|timesince }} ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}
